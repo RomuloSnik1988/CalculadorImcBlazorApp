@@ -1,0 +1,53 @@
+﻿@page "/imc"
+
+<h1>Calculador de IMC</h1>
+
+<label for="altura">Altura (em metros)</label>
+<input @bind="Altura" id="altura" type="number" />
+
+<label for="peso">Peso (em quilogramas)</label>
+<input @bind="Peso" id="peso" type="number" />
+
+<button @onclick="CalcularImc">Calcular IMC</button>
+<label>O IMC é <span>@ImcCalculado</span></label>
+<label><span>@ImcResultado</span></label>
+
+@code {
+    private double Altura { get; set; }
+    private double Peso { get; set; }
+    private string? ImcResultado;
+
+    public double ImcCalculado { get; set; }
+
+    private void CalcularImc()
+    {
+
+        ImcCalculado = Peso / Math.Pow(Altura, 2);
+
+        if(ImcCalculado < 18.6)
+        {
+            ImcResultado = "Você esta abaixo do Peso";
+        }
+        else if (ImcCalculado >= 18.6 && ImcCalculado <= 24.9)
+        {
+            ImcResultado = "Peso Ideal";
+        }
+        else if(ImcCalculado >= 24.9 && ImcCalculado <= 29.9)
+        {
+            ImcResultado = "Você esta levemente acima do peso";
+        }
+        else if (ImcCalculado >=29.9 && ImcCalculado <= 34.9)
+        {
+            ImcResultado = "Atenção!!! Você esta com Grau de Obesidade I";
+        }
+        else if(ImcCalculado >=34.9 && ImcCalculado <= 39.0)
+        {
+            ImcResultado = "Atenção!!! Você esta com Grau de Obesidade II"; 
+        }
+        else if(ImcCalculado >= 40)
+        {
+            ImcResultado = "Atenção!!! Você esta com Grau de Obesidade III";
+        }
+    }
+
+}
