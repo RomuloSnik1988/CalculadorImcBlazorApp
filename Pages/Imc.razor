@@ -9,20 +9,22 @@
 <input @bind="Peso" id="peso" type="number" />
 
 <button @onclick="CalcularImc">Calcular IMC</button>
-<label>O IMC é <span>@ImcCalculado</span></label>
-<label><span>@ImcResultado</span></label>
+<label>O IMC é : <span>@ImcCalculadoF</span></label>
+<span>@ImcResultado</span>
 
 @code {
     private double Altura { get; set; }
     private double Peso { get; set; }
-    private string? ImcResultado;
+    private string ImcResultado;
 
     public double ImcCalculado { get; set; }
+    public string ImcCalculadoF;
 
     private void CalcularImc()
     {
 
         ImcCalculado = Peso / Math.Pow(Altura, 2);
+        ImcCalculadoF = ImcCalculado.ToString("F2");
 
         if(ImcCalculado < 18.6)
         {
